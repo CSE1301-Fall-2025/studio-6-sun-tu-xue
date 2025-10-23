@@ -1,5 +1,7 @@
 package studio6;
 
+import edu.princeton.cs.introcs.StdDraw;
+
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
@@ -18,6 +20,41 @@ public class IterativeMethods {
 			sum = sum + Math.pow(0.5, power);
 		}
 		return sum;
+	}
+
+	public static double geometricSumRecursive(int n) {
+		double sum = Math.pow(0.5, n);
+		if(n == 1) {
+			return 0.5;
+		} else {
+			sum = sum + geometricSumRecursive(n - 1);
+			return sum;
+		}
+	}
+
+	public static void circlesUponCircles(double radiusMinimumDrawingThreshold) {
+		
+		double bound = 5.0;
+		StdDraw.setXscale(-bound, bound);
+		StdDraw.setYscale(-bound, bound);
+
+		double radius = 3.0;
+		if(radius < radiusMinimumDrawingThreshold) {
+			return;
+		} else {
+			double xPos = 0.0;
+			double yPos = 0.0;
+
+			StdDraw.circle(xPos, yPos, radius);
+			StdDraw.circle(xPos, yPos + radius, radius/3);
+			StdDraw.circle(xPos, yPos - radius, radius/3);
+			StdDraw.circle(xPos+radius, yPos, radius/3);
+			StdDraw.circle(yPos-radius, yPos, radius/3);
+			
+			xPos += radius;
+			yPos += radius;
+			radius = radius / 3;
+		}
 	}
 
 	/**
@@ -53,4 +90,18 @@ public class IterativeMethods {
 		}
 		return reversed;
 	}
+
+
+	public static void main(String[] args) {
+
+	circlesUponCircles(0.0003);
+
+
+
+	
+	}
+
+
+
+
 }
